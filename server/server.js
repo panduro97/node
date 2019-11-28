@@ -16,8 +16,8 @@ app.use( require('./rutas/usuario.js'))
 
 
 
-mongoose.connect('mongodb://localhost:27017/cafe', () => {
-    useNewUrlParser: true
+mongoose.connect(process.env.URLDB ,(err,res) => {
+    if(err) throw err;
     console.log('base de datos;')
 });
 
