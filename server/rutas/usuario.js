@@ -99,7 +99,7 @@ app.delete('/usuario/:id', function(req, res) {
     let cambiaEstado = {
         estado : false
     }
-    let idObjeto = {
+    let idObjeto =  {
         _id: req.params.id
     }
 
