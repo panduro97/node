@@ -6,8 +6,9 @@ const _ = require('underscore');
 
 const app = express();
 const Usuario = require('../models/usuario')
+const { verificaToken } = require('../middlewares/autenticacion.js')
 
-app.get('/usuario', function(req, res) {
+app.get('/usuario', verificaToken, (req, res) => {
 
     let desde = req.query.desde || 0;
     desde = Number(desde);
@@ -46,7 +47,7 @@ app.get('/usuario', function(req, res) {
 app.post('/usuario', function(req, res) {
 
     let body = req.body;
-
+    console.log(body);
     let usuario = new Usuario({
         nombre : body.nombre,
         email : body.email,
