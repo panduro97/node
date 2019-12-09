@@ -3,11 +3,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Usuario = require('../models/usuario')
 const app = express();
+const { verificaToken } = require('../middlewares/autenticacion.js')
 
 
 
 
-app.post('/login',(req,res) => {
+
+app.post('/login', verificaToken,(req,res) => {
 
     let body = req.body;
     Usuario.findOne({ email: body.email }, (err, usuarioDB) => {
