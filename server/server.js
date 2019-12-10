@@ -18,6 +18,7 @@ app.use(bodyParser.json())
 app.use( express.static(path.resolve( __dirname, '../public')));
 
 
+app.use( require('./rutas/index'))
 
 
 mongoose.connect(process.env.URLDB ,(err,res) => {
@@ -35,6 +36,7 @@ mongoose.connect(process.env.URLDB ,(err,res) => {
 
 
 
-app.listen(process.env.PORT, () => {
-    console.log('Escuchando puerto: ', process.env.PORT);
+app.listen(process.env.PORT, (err, res) => {
+    if(err) throw err;
+    console.log(process.env.PORT);
 });
