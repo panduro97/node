@@ -2,6 +2,7 @@ require('./config/config');
 
 const mongoose = require('mongoose');
 const express = require('express');
+const path = require('path');
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Configuracion de rutas
-app.use( require('./rutas/index.js'))
+app.use( express.static(path.resolve( __dirname, '../public')));
 
 
 
