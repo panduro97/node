@@ -64,7 +64,14 @@ app.post('/login',(req,res) => {
 
 
 
+app.post('/google',(req,res) => {
 
+    /* let token = req.body */
+    res.json({
+        body: req.body
+    });
+
+})
 
 
 
