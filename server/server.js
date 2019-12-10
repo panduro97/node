@@ -18,7 +18,7 @@ app.use(bodyParser.json())
 app.use( express.static(path.resolve( __dirname, '../public')));
 
 
-app.use( require('./rutas/index'))
+app.use( require('./rutas/index.js'))
 
 
 mongoose.connect(process.env.URLDB ,(err,res) => {
@@ -39,4 +39,5 @@ mongoose.connect(process.env.URLDB ,(err,res) => {
 app.listen(process.env.PORT, (err, res) => {
     if(err) throw err;
     console.log(process.env.PORT);
+
 });
