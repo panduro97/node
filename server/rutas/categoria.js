@@ -9,12 +9,47 @@ let Categoria = require('../models/categorias')
 const { verificaToken } = require('../middlewares/autenticacion.js')
 
 
-app.get('/categoria', verificaToken,(req, res) => {
+app.get('/categoria',(req, res) => {
+    console.log('alo');
+    Categoria.find()
+            .exec((err, categorias) => {
+                
+                if(err) {
+                    return res.status(400).json({
+                        ok:false,
+                        err
+                    });
+                }
 
-    console.log(req)
-    console.log(res)
 
+                res.json({
+                    ok:true,
+                    categorias,
+                })
+
+            })
 })
+
+app.get('/categorias/:id ', (req, res) => {
+
+    let id = req.params.id
+    console.log(id);
+    Categoria.findById(id, (err,categorias) => {
+
+                if(err) {
+                    return res.status(500).json({
+                        ok:false,
+                        err
+                    });
+                }
+
+                res.json({
+                    ok:true,
+                    categorias,
+                })
+
+            })
+        })
 
 app.post('/categoria',(req, res) => {
 
@@ -40,8 +75,6 @@ app.post('/categoria',(req, res) => {
         });
 
     })
-
-
 
 })
 
