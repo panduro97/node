@@ -48,7 +48,37 @@ app.get('/producto',[ verificaToken ],(req, res) => {
         })
 })
 
+app.get('/producto/buscar/:termino',[ verificaToken ],(req, res) => {
 
+    let termino = req.params.termino;
+
+    let regex = new RegExp(termino, 'i');
+
+    Producto.find({ nombre: regex })
+            .populate('categoria', 'nombre')
+            .exec((err, productos) => {
+                
+                if(err) {
+                    return res.status(500).json({
+                        ok:false,
+                        err
+                    });
+                }
+
+                if(!productos) {
+                    return res.status(400).json({
+                        ok:false,
+                        err
+                    });
+                }
+
+                res.json({
+                    ok:true,
+                    productos,
+                })
+
+        })
+})
 
 app.get('/producto/:id', [ verificaToken ], (req, res) => {
 
@@ -178,7 +208,7 @@ app.delete('/producto/:id', [ verificaToken ], function(req, res) {
         
         res.json({
             ok:true,
-            message: 'Producto no disponible'
+            message: 'Producto no disponible',
         })
 
     })
